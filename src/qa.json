@@ -1,0 +1,22 @@
+[
+    {
+        "question": "How many legs does a spider have?",
+        "right_answer": "Eight",
+        "wrong_answers": ["Six", "Two", "Ten"]
+    },
+    {
+        "question": "What is the name of the toy cowboy in Toy Story?",
+        "right_answer": "Woody",
+        "wrong_answers": ["Andy", "Toby"]
+    },
+    {
+        "question": "What is the color of an emerald?",
+        "right_answer": "Green",
+        "wrong_answers": ["Yellow", "Black"]
+    },
+    {
+        "question": "What's the name of a place you go to see lots of animals?",
+        "right_answer": "The zoo",
+        "wrong_answers": ["The hotel", "At home"]
+    }
+]
