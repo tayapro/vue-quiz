@@ -5,3 +5,38 @@
     /* font-family: Montserrat; */
     font-family: 'Inconsolata', monospace;
 }
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+    transition: all 0.25s ease-out;
+}
+
+.slide-up-enter-from {
+    opacity: 0;
+    transform: scale(1, 0) translateY(-30px);
+}
+
+.slide-up-leave-to {
+    opacity: 0;
+    transform: scale(1, 0) translateY(30px);
+}
+
+.slide-upup-enter-active,
+.slide-upup-leave-active {
+    transition: all 0.25s ease-out;
+}
+
+.slide-upup-enter-from,
+.slide-upup-leave-to {
+    transform: translateY(-30px);
+}
+
+.flip-enter-active,
+.flip-leave-active {
+    transition: all 0.25s ease-out;
+}
+
+.flip-enter-from,
+.flip-leave-to {
+    transform: scale(1, 0);
+}

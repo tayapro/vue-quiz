@@ -1,55 +1,55 @@
 <script setup>
-import arrQA from './qa.json'
 import { ref } from 'vue'
+import QuizCard from './components/QuizCard.vue'
 
-console.log(arrQA)
+const arrQA = [
+    {
+        question: 'How many legs does a spider have?',
+        correct: 'Eight',
+        options: ['Eight', 'Six', 'Two', 'Ten'],
+    },
+    {
+        question: 'What is the name of the toy cowboy in Toy Story?',
+        correct: 'Woody',
+        options: ['Woody', 'Andy', 'Toby'],
+    },
+    {
+        question: 'What is the color of an emerald?',
+        correct: 'Green',
+        options: ['Green', 'Yellow', 'Black'],
+    },
+    {
+        question: "What's the name of a place you go to see lots of animals?",
+        correct: 'A zoo',
+        options: ['A zoo', 'An office', 'At home'],
+    },
+]
 
-function rnd(n) {
-    return Math.floor(Math.random() * n)
-}
+// TODO: Create sanitize data
 
-function pickRandomQuestion(qas) {
-    return qas[rnd(qas.length)]
-}
+const index = ref(0)
+const score = ref(0)
 
-const { question, right_answer, wrong_answers } = pickRandomQuestion(arrQA)
-
-function shuffle(arr) {
-    return arr.sort(() => Math.random() - 0.5)
-}
-
-const answers = shuffle([right_answer, ...wrong_answers])
-const gotAnswer = ref(false)
-const isAnswerCorrect = ref(false)
-
-function checkAnswer(a) {
-    gotAnswer.value = true
-    isAnswerCorrect.value = a === right_answer
+function nextCard(isAnswerCorrect) {
+    index.value += 1
+    index.value %= arrQA.length
+    if (isAnswerCorrect) score.value += 1
 }
 </script>
 
 <template>
-    <div>
-        <button @click="pickRandomQuestion(arrQA)">Buton</button>
-        <h3>{{ question }}</h3>
-        <button v-for="a in answers" @click="checkAnswer(a)">
-            {{ a }}
-        </button>
-        <div v-if="gotAnswer">
-            <h3 v-if="isAnswerCorrect" class="msg_right">Congrats</h3>
-            <h3 v-else class="msg_wrong">
-                Ops, right answer is {{ right_answer }}
-            </h3>
-        </div>
-    </div>
+    <span class="score">Score:&nbsp;</span>
+    <Transition name="flip" mode="out-in">
+        <span class="score" :key="score">{{ score }}</span>
+    </Transition>
+    <Transition name="slide-up" mode="out-in">
+        <QuizCard :quiz="arrQA[index]" :key="index" @next="nextCard" />
+    </Transition>
 </template>
 
 <style scoped>
-.msg_right {
-    color: green;
-}
-
-.msg_wrong {
-    color: red;
+.score {
+    font-size: 1.3rem;
+    display: inline-block;
 }
 </style>
