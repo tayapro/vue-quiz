@@ -21,31 +21,89 @@ function onNext() {
 
 <template>
     <div class="box">
-        <h3>{{ props.quiz.question }}</h3>
-        <button
-            v-for="opt in shuffledOptions"
-            @click="checkAnswer(opt)"
-            :disabled="gotAnswer"
-        >
-            {{ opt }}
-        </button>
+        <div class="question">
+            <h3>{{ props.quiz.question }}</h3>
+        </div>
+        <div class="answers">
+            <button
+                class="answer-button"
+                v-for="opt in shuffledOptions"
+                @click="checkAnswer(opt)"
+                :disabled="gotAnswer"
+            >
+                {{ opt }}
+            </button>
+        </div>
 
         <Transition name="slide-up" mode="out-in">
-            <h3 v-if="gotAnswer && isAnswerCorrect" class="msg-right">
+            <h4 v-if="gotAnswer && isAnswerCorrect" class="msg-right">
                 Congrats
-            </h3>
-            <h3 v-else-if="gotAnswer && !isAnswerCorrect" class="msg-wrong">
+            </h4>
+            <h4 v-else-if="gotAnswer && !isAnswerCorrect" class="msg-wrong">
                 Ops, right answer is {{ props.quiz.correct }}
-            </h3>
-            <h3 v-else>Answer the question</h3>
+            </h4>
+            <h4 v-else>Answer the question</h4>
         </Transition>
         <div>
-            <button @click="onNext()" :disabled="!gotAnswer">Next</button>
+            <button
+                class="next-button"
+                @click="onNext()"
+                :disabled="!gotAnswer"
+            >
+                Next
+            </button>
         </div>
     </div>
 </template>
 
 <style scoped>
+.next-button {
+    background-color: rgb(255, 255, 0);
+    margin: 0.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 5px;
+    border: 1px rgb(255, 255, 0) solid;
+    cursor: pointer;
+}
+
+.next-button:hover {
+    background-color: rgb(220, 217, 31);
+    border-color: rgb(220, 217, 31);
+}
+.question {
+    text-align: center;
+    padding: 0.5rem;
+}
+.answer-button {
+    background-color: rgb(0, 94, 255);
+    margin: 0.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 5px;
+    border: 1px rgb(0, 94, 255) solid;
+    cursor: pointer;
+    color: aliceblue;
+}
+
+.answer-button:hover:enabled {
+    background-color: rgb(220, 31, 198);
+    border-color: rgb(220, 31, 198);
+}
+
+.answer-button:hover:disabled {
+    cursor: default;
+}
+
+.answer-button:disabled {
+    background-color: rgb(113, 112, 112);
+    border-color: rgb(113, 112, 112);
+}
+
 .msg-right {
     color: green;
 }
@@ -55,8 +113,16 @@ function onNext() {
 }
 
 .box {
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
     padding: 1rem;
     margin: 1rem;
+    width: 60%;
+    background-color: rgb(4, 4, 68);
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+    box-shadow: rgba(4, 4, 68, 0.35) 0px 5px 15px;
 }
 </style>

@@ -1,8 +1,8 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import QuizCard from './components/QuizCard.vue'
 
-const arrQA = [
+const arrQA = sanitizeData([
     {
         question: 'How many legs does a spider have?',
         correct: 'Eight',
@@ -23,9 +23,12 @@ const arrQA = [
         correct: 'A zoo',
         options: ['A zoo', 'An office', 'At home'],
     },
-]
-
-// TODO: Create sanitize data
+    {
+        question: "INCORRECT, FOR TEST: What's my fav fruit?",
+        correct: 'cucumber',
+        options: ['apple', 'orange', 'melon'],
+    },
+])
 
 const index = ref(0)
 const score = ref(0)
@@ -35,21 +38,53 @@ function nextCard(isAnswerCorrect) {
     index.value %= arrQA.length
     if (isAnswerCorrect) score.value += 1
 }
+
+function sanitizeData(arr) {
+    let newArr = []
+    for (let q of arr) {
+        const { options, correct } = q
+        if (options.includes(correct)) {
+            newArr.push(q)
+        }
+    }
+    return newArr
+    // return arr.filter((q) => q.options.includes(q.correct))
+}
 </script>
 
 <template>
-    <span class="score">Score:&nbsp;</span>
-    <Transition name="flip" mode="out-in">
-        <span class="score" :key="score">{{ score }}</span>
-    </Transition>
-    <Transition name="slide-up" mode="out-in">
-        <QuizCard :quiz="arrQA[index]" :key="index" @next="nextCard" />
-    </Transition>
+    <div class="center">
+        <div class="center-by-flex">
+            <span class="score">Score:&nbsp;</span>
+            <Transition name="flip" mode="out-in">
+                <span class="score" :key="score">{{ score }}</span>
+            </Transition>
+        </div>
+        <div class="center-by-flex">
+            <Transition name="slide-up" mode="out-in">
+                <QuizCard :quiz="arrQA[index]" :key="index" @next="nextCard" />
+            </Transition>
+        </div>
+    </div>
 </template>
 
 <style scoped>
 .score {
     font-size: 1.3rem;
     display: inline-block;
+    align-content: center;
+}
+
+.center-by-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100dvh;
 }
 </style>
