@@ -6,6 +6,12 @@
     font-family: 'Inconsolata', monospace;
 }
 
+body {
+    /* background-image: linear-gradient(180deg, rgb(102, 0, 255), yellow); */
+    height: 100%;
+    overflow-y: hidden;
+}
+
 .slide-up-enter-active,
 .slide-up-leave-active {
     transition: all 0.25s ease-out;
@@ -39,4 +45,14 @@
 .flip-enter-from,
 .flip-leave-to {
     transform: scale(1, 0);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
 }

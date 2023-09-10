@@ -40,7 +40,7 @@ function onNext() {
                 Congrats
             </h4>
             <h4 v-else-if="gotAnswer && !isAnswerCorrect" class="msg-wrong">
-                Ops, right answer is {{ props.quiz.correct }}
+                Ops, right answer is "{{ props.quiz.correct }}"
             </h4>
             <h4 v-else>Answer the question</h4>
         </Transition>
@@ -95,28 +95,31 @@ function onNext() {
     border-color: rgb(220, 31, 198);
 }
 
+.next-button:hover:disabled,
 .answer-button:hover:disabled {
     cursor: default;
 }
 
+.next-button:disabled,
 .answer-button:disabled {
     background-color: rgb(113, 112, 112);
     border-color: rgb(113, 112, 112);
 }
 
 .msg-right {
-    color: green;
+    color: rgb(3, 206, 3);
 }
 
 .msg-wrong {
-    color: red;
+    color: rgb(246, 74, 74);
 }
 
 .box {
     padding: 1rem;
     margin: 1rem;
+    margin-top: 0.5rem;
     width: 60%;
-    background-color: rgb(4, 4, 68);
+    background-color: rgba(4, 4, 68, 0.8);
     color: aliceblue;
     display: flex;
     justify-content: center;
