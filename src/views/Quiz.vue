@@ -71,31 +71,6 @@ function sanitizeData(arr) {
 </template>
 
 <style scoped>
-.header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    height: 10dvh;
-}
-
-.header-item {
-    flex-grow: 1;
-    color: aliceblue;
-}
-
-.title {
-    padding-left: 3rem;
-}
-
-.about {
-    display: flex;
-    justify-content: right;
-    padding-right: 3rem;
-}
-.span-box {
-    background-color: aqua;
-}
 .score {
     font-size: 1.3rem;
     display: inline-block;
@@ -132,6 +107,6 @@ function sanitizeData(arr) {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 90dvh;
+    height: 100dvh;
 }
 </style>
