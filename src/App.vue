@@ -1,11 +1,34 @@
+<script setup>
+import { useRouter } from 'vue-router'
+
+import { ref } from 'vue'
+
+const newQuizBtnVisible = ref(true)
+
+const router = useRouter()
+router.beforeEach((to, from) => {
+    // console.log('to', to)
+    // console.log('from', from)
+    if (to.path === '/') newQuizBtnVisible.value = true
+    else newQuizBtnVisible.value = false
+})
+</script>
+
 <template>
     <div class="navbar">
-        <div class="logo">
-            <h2>SUUPA</h2>
+        <div class="logo-new-quiz">
+            <div class="logo">
+                <h2>SUUPA</h2>
+            </div>
+            <div>
+                <button class="new-quiz-button" v-if="newQuizBtnVisible">
+                    <h3>New Quiz</h3>
+                </button>
+            </div>
         </div>
         <div class="routes">
-            <RouterLink to="/"><h4>Quiz</h4></RouterLink>
-            <RouterLink to="/about"><h4>About</h4></RouterLink>
+            <RouterLink to="/"><h3>Quiz</h3></RouterLink>
+            <RouterLink to="/about"><h3>About</h3></RouterLink>
         </div>
     </div>
 
@@ -17,7 +40,22 @@
 </template>
 
 <style scoped>
-.routes h4 {
+.new-quiz-button {
+    all: unset;
+    color: rgb(255, 255, 255);
+}
+
+.new-quiz-button:hover {
+    cursor: pointer;
+}
+.logo-new-quiz {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 1rem;
+}
+.routes h3 {
     color: rgb(255, 255, 255);
     margin-top: 0.3em;
     margin-bottom: 0.3em;
@@ -26,6 +64,7 @@
     color: yellow;
     margin-top: 0.3em;
     margin-bottom: 0.3em;
+    font-family: 'Monoton';
 }
 .navbar {
     background-color: rgba(4, 4, 68, 0.6);
@@ -39,10 +78,7 @@
 .routes {
     display: flex;
     gap: 1rem;
-}
-
-a {
-    text-decoration: none;
+    margin-right: 1rem;
 }
 
 a.router-link-active {

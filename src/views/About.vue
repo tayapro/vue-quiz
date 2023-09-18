@@ -3,7 +3,7 @@
         <div class="center">
             <div>
                 <div class="header">
-                    <h1>ABOUT</h1>
+                    <h1>About</h1>
                 </div>
                 <div class="img">
                     <img src="@/logo/quiz.png" alt="user" width="150" />
