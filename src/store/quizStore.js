@@ -35,6 +35,7 @@ export const useStore = defineStore('quiz', () => {
     const index = ref(0)
 
     function getCurrentQuiz() {
+        // console.log(`arr length = ${arrQA.length}`)
         return arrQA[index.value]
     }
 
@@ -50,6 +51,12 @@ export const useStore = defineStore('quiz', () => {
     function startNewQuiz() {
         score.value = 0
         index.value = 0
+    }
+
+    function isQuizFinished() {
+        // if (index.value === arrQA.length - 1) return true
+        // return false
+        return index.value === arrQA.length - 1
     }
 
     function sanitizeData(arr) {
@@ -72,5 +79,6 @@ export const useStore = defineStore('quiz', () => {
         nextCard,
         checkAnswer,
         startNewQuiz,
+        isQuizFinished,
     }
 })

@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from 'vue'
 import QuizCard from '@/components/QuizCard.vue'
+import QuizScore from '@/components/QuizScore.vue'
 import { useStore } from '../store/quizStore'
 
 const store = useStore()
@@ -13,7 +13,7 @@ function nextCard(isAnswerCorrect) {
 
 <template>
     <div class="container">
-        <div class="center">
+        <div class="score-center" v-if="!store.isQuizFinished()">
             <div class="span-center">
                 <span class="score">Score:&nbsp;</span>
                 <Transition name="flip" mode="out-in">
@@ -26,23 +26,37 @@ function nextCard(isAnswerCorrect) {
         <div class="card-center">
             <Transition name="slide-up" mode="out-in">
                 <QuizCard
+                    v-if="!store.isQuizFinished()"
                     :quiz="store.getCurrentQuiz()"
                     :key="store.index"
                     @next="nextCard"
                 />
+                <QuizScore v-else />
             </Transition>
         </div>
     </div>
 </template>
 
 <style scoped>
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+}
+
+.card-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .score {
     font-size: 1.3rem;
     display: inline-block;
     align-content: center;
 }
 
-.center {
+.score-center {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,18 +74,5 @@ function nextCard(isAnswerCorrect) {
     border-radius: 15px;
     background-color: rgba(202, 202, 202, 0.377);
     box-shadow: rgba(202, 202, 202, 0.35) 0px 5px 15px;
-}
-
-.card-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100dvh;
 }
 </style>

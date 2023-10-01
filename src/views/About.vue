@@ -50,7 +50,6 @@
 .container {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     padding-top: 7rem;
     height: 100dvh;
 }

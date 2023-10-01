@@ -1,8 +1,10 @@
 <script setup>
 import { useRouter } from 'vue-router'
+import { useStore } from './store/quizStore'
 
 import { ref } from 'vue'
 
+const store = useStore()
 const newQuizBtnVisible = ref(true)
 
 const router = useRouter()
@@ -21,7 +23,11 @@ router.beforeEach((to, from) => {
                 <h2>SUUPA</h2>
             </div>
             <div>
-                <button class="new-quiz-button" v-if="newQuizBtnVisible">
+                <button
+                    class="new-quiz-button"
+                    v-if="newQuizBtnVisible"
+                    @click="store.startNewQuiz()"
+                >
                     <h3>New Quiz</h3>
                 </button>
             </div>
@@ -42,11 +48,25 @@ router.beforeEach((to, from) => {
 <style scoped>
 .new-quiz-button {
     all: unset;
+    border-radius: 5px;
+    border: 3px rgba(0, 94, 255, 0.5) solid;
     color: rgb(255, 255, 255);
 }
 
+.new-quiz-button h3 {
+    padding: 0rem;
+    margin: 0.3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
 .new-quiz-button:hover {
+    all: unset;
     cursor: pointer;
+    border-radius: 5px;
+    background-color: rgba(0, 94, 255, 0.5);
+    border: 3px rgba(0, 94, 255, 0.05) solid;
+    color: rgb(255, 255, 255);
 }
 .logo-new-quiz {
     display: flex;
@@ -79,9 +99,5 @@ router.beforeEach((to, from) => {
     display: flex;
     gap: 1rem;
     margin-right: 1rem;
-}
-
-a.router-link-active {
-    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
 }
 </style>
